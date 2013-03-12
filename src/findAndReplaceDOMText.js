@@ -219,6 +219,10 @@ window.findAndReplaceDOMText = (function() {
 
       if (startNode === endNode) {
         var node = startNode;
+        // Check if the markup has already been added (requires a class to be defined)
+        if (nodeName.className && node.parentNode.className == nodeName.className) {
+          return ''
+        }
         if (range.startNodeIndex > 0) {
           // Add `before` text node (before the match)
           var before = document.createTextNode(node.data.substring(0, range.startNodeIndex));
